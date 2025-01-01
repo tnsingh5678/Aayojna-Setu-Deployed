@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Redis service
+  redis:
+    image: redis:latest
+    container_name: redis-container
+    ports:
+      - "6379:6379"  # Expose Redis on port 6379
+    networks:
+      - app-network
+
+  # Express application service
+  app:
+    build: .
+    container_name: express-app
+    ports:
+      - "5000:5000"  # Expose Express app on port 4000
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    networks:
+      - app-network
+    volumes:
+      - .:/app  # Mount the app directory to the container
+
+networks:
+  app-network:
+    driver: bridge
