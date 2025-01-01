@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import validator from 'validator'; // Make sure to import the validator library if you plan to use email vali
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 
